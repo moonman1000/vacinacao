@@ -57,7 +57,7 @@
             </div>
             <div class="card-body">
                 <a href="formulario.php" class="btn btn-outline-success btn-custom">Fazer o Cadastro</a>
-                <a href="visualizar.php" class="btn btn-outline-primary btn-custom">Administrador</a>
+                <a href="visualiza.php" class="btn btn-outline-primary btn-custom">Administrador</a>
             </div>
         </div>
     </div>

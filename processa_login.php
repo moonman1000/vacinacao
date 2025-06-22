@@ -38,7 +38,7 @@ if ($result->num_rows === 1) {
         $_SESSION['user_role'] = 'admin';
 
         // Redireciona para o dashboard
-        header("location: dashboard.php");
+        header("location: index.php");
     } else {
         // Senha incorreta
         echo "Senha incorreta.";
