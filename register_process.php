@@ -1,12 +1,11 @@
 <?php
-// Configuração do banco de dados
-$servername = "localhost"; // ou o endereço do seu servidor MySQL
-$username = "root";
-$password = "";
-$dbname = "cadastro_vacinacao";
-
-// Conexão ao banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Configuração do banco de dados usando variáveis de ambiente
+$servername = getenv('DB_HOST');
+$username   = getenv('DB_USER');
+$password   = getenv('DB_PASSWORD');
+$dbname     = getenv('DB_NAME');
+$port       = getenv('DB_PORT');
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Verificação da conexão
 if ($conn->connect_error) {
@@ -27,7 +26,7 @@ $stmt->bind_param("sisss", $nome, $idade, $telefone, $vacinadoGripe, $vacinadoCo
 
 // Executa a consulta e verifica se foi bem-sucedida
 if ($stmt->execute()) {
-    header("Location: ".$_SERVER['HTTP_REFERER']."?insert_success=true");
+    header("Location: formulario.php?insert_success=true");
     exit();
 } else {
     echo "Erro ao inserir os dados: " . $conn->error;

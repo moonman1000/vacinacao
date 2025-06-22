@@ -1,12 +1,11 @@
 <?php
-// Configuração do banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cadastro_vacinacao";
-
-// Conexão ao banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Configuração do banco de dados usando variáveis de ambiente
+$servername = getenv('DB_HOST');
+$username   = getenv('DB_USER');
+$password   = getenv('DB_PASSWORD');
+$dbname     = getenv('DB_NAME');
+$port       = getenv('DB_PORT');
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Verificação da conexão
 if ($conn->connect_error) {
@@ -43,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt_insert->execute()) {
         echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='login.php';</script>";
+        exit;
     } else {
         echo "Erro: " . $sql_insert . "<br>" . $conn->error;
     }

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Configuração do banco de dados usando variáveis de ambiente
 $servername = getenv('DB_HOST');
 $username   = getenv('DB_USER');
@@ -6,8 +8,8 @@ $password   = getenv('DB_PASSWORD');
 $dbname     = getenv('DB_NAME');
 $port       = getenv('DB_PORT'); // Adicione esta variável no Render
 
-// Conexão ao banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Conexão ao banco de dados (incluindo a porta)
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Verificação da conexão
 if ($conn->connect_error) {
@@ -36,8 +38,9 @@ if ($result->num_rows === 1) {
         $_SESSION['email'] = $row['email'];
         $_SESSION['user_role'] = 'admin';
 
-        // Redireciona para o dashboard
+        // Redireciona para a página de visualização
         header("location: visualiza.php");
+        exit;
     } else {
         // Senha incorreta
         echo "Senha incorreta.";

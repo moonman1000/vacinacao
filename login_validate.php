@@ -8,8 +8,8 @@ $password   = getenv('DB_PASSWORD');
 $dbname     = getenv('DB_NAME');
 $port       = getenv('DB_PORT'); // Adicione esta variável no Render
 
-// Conexão ao banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Conexão ao banco de dados (incluindo a porta)
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Verificação da conexão
 if ($conn->connect_error) {
@@ -38,13 +38,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $username;
 
             header("location: visualiza.php");
+            exit;
         } else {
             // Senha incorreta
             echo "<script>alert('Senha incorreta.'); window.location.href='login.php';</script>";
+            exit;
         }
     } else {
         // Usuário não encontrado
         echo "<script>alert('Usuário não encontrado.'); window.location.href='login.php';</script>";
+        exit;
     }
 
     $stmt->close();
