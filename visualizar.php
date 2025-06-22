@@ -334,11 +334,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         }
                         echo "</tbody>";
                         echo "</table>";
-                        echo "<a href='dashboard.php' class='btn btn-outline-primary btn-custom'>Voltar</a>";
+                        echo "<a href='index.php' class='btn btn-outline-primary btn-custom'>Voltar</a>";
                         echo "<button onclick='window.print()' class='btn btn-outline-info btn-custom'>Gerar Relatório</button>";
                     } else {
                         echo "<p class='text-white'>Nenhum usuário cadastrado.</p>";
-                        echo "<a href='dashboard.php' class='btn btn-outline-primary btn-custom'>Voltar</a>";
+                        echo "<a href='index.php' class='btn btn-outline-primary btn-custom'>Voltar</a>";
                     }
 
                     // Fechamento da conexão com o banco de dados
@@ -352,4 +352,4 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 </html>
 
 
->>>>>>> 68221b35f241cb4d8c71073fab7709096587fc5d
+
