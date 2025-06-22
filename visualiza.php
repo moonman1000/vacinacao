@@ -125,8 +125,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     echo "<div class='container'>";
     if ($result && $result->num_rows > 0) {
         echo "<h2>PARÔQUIA NOSSA SENHORA DE FÁTIMA<br>Membros Cadastrados</h2>";
-        // Botão para gerar PDF
-        echo '<a href="relatorio_membros.php" class="print-btn" target="_blank">Gerar Relatório PDF</a>';
         // Botão para imprimir
         echo "<button onclick='window.print()' class='print-btn'>Imprimir</button>";
         echo "<table>";
