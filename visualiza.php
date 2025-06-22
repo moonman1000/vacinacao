@@ -48,7 +48,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         }
         .return-btn, .print-btn, .logout-btn {
             display: block;
-            width: 100px;
+            width: 180px;
             margin: 20px auto;
             padding: 10px;
             text-align: center;
@@ -90,8 +90,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             background-color: #CC0000;
         }
         @media print {
-            .actions-col {
-                display: none;
+            .actions-col,
+            .logout-btn,
+            .return-btn,
+            .print-btn {
+                display: none !important;
             }
         }
     </style>
@@ -122,9 +125,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     echo "<div class='container'>";
     if ($result && $result->num_rows > 0) {
         echo "<h2>PARÔQUIA NOSSA SENHORA DE FÁTIMA<br>Membros Cadastrados</h2>";
+        // Botão para gerar PDF
+        echo '<a href="relatorio_membros.php" class="print-btn" target="_blank">Gerar Relatório PDF</a>';
+        // Botão para imprimir
+        echo "<button onclick='window.print()' class='print-btn'>Imprimir</button>";
         echo "<table>";
         echo "<tr><th>Nome</th><th>Idade</th><th>Telefone</th><th class='actions-col'>Ações</th></tr>";
-        // Ajuste os campos abaixo conforme as colunas da sua tabela membros
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
@@ -138,7 +144,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         }
         echo "</table>";
         echo "<a href='index.php' class='return-btn'>Voltar</a>";
-        echo "<button onclick='window.print()' class='print-btn'>Imprimir</button>";
     } else {
         echo "<p>Nenhum membro cadastrado.</p>";
         echo "<a href='index.php' class='return-btn'>Voltar</a>";
