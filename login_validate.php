@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['id'] = $id;
             $_SESSION['username'] = $username;
 
-            header("location: visualizar.php");
+            header("location: visualiza.php");
         } else {
             // Senha incorreta
             echo "<script>alert('Senha incorreta.'); window.location.href='login.php';</script>";
