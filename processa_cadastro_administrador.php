@@ -53,7 +53,7 @@ $conn->close();
         <div class="card card-login mx-auto text-center bg-dark mt-5">
             <div class="card-body">
                 <a href="cadastro_administrador.php" class="btn btn-outline-primary btn-custom">Voltar</a>
-                <a href="dashboard.php" class="btn btn-outline-primary btn-custom">Dashboard</a>
+                <a href="index.php" class="btn btn-outline-primary btn-custom">Dashboard</a>
             </div>
         </div>
     </div>
