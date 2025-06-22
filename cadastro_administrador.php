@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="form-group">
-                    <a href="dashboard.php" class="btn btn-outline-light float-left">Voltar</a>
+                    <a href="index.php" class="btn btn-outline-light float-left">Voltar</a>
                 </div>
             </form>
         </div>
@@ -237,7 +237,7 @@
                 </div>
 
                 <div class="form-group">
-                    <a href="dashboard.php" class="btn btn-outline-light float-left">Voltar</a>
+                    <a href="index.php" class="btn btn-outline-light float-left">Voltar</a>
                 </div>
             </form>
         </div>
