@@ -21,6 +21,13 @@ $telefone = $_POST['telefone'] ?? '';
 $vacinadoGripe = isset($_POST['vacinado_gripe']) ? 'Sim' : 'Não';
 $vacinadoCovid = isset($_POST['vacinado_covid']) ? 'Sim' : 'Não';
 
+// Validação dos campos obrigatórios
+if (empty($nome) || empty($idade) || empty($telefone)) {
+    echo "Por favor, preencha todos os campos obrigatórios.";
+    $conn->close();
+    exit();
+}
+
 // Prepara a consulta SQL para inserir os dados
 $sql_insert = "INSERT INTO membros (nome, idade, telefone, vacinado_gripe, vacinado_covid) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql_insert);
