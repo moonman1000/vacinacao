@@ -1,22 +1,10 @@
-<<<<<<< HEAD
 FROM php:8.2-apache
 
-# Instala a extensão mysqli (necessária para MySQL)
+# Instala a extensão mysqli
 RUN docker-php-ext-install mysqli
 
-# Copia todos os arquivos do seu projeto para a pasta padrão do Apache
+# Copia os arquivos do projeto para o Apache
 COPY . /var/www/html/
 
-# Ativa o mod_rewrite do Apache (necessário se você usa .htaccess)
-=======
-FROM php:8.2-apache
-
-# Instala a extensão mysqli (necessária para MySQL)
-RUN docker-php-ext-install mysqli
-
-# Copia todos os arquivos do seu projeto para a pasta padrão do Apache
-COPY . /var/www/html/
-
-# Ativa o mod_rewrite do Apache (necessário se você usa .htaccess)
->>>>>>> 82495bcd8ce4eed5421d72c797995b24eda64b66
+# Ativa o mod_rewrite do Apache (se usar .htaccess)
 RUN a2enmod rewrite
