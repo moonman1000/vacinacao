@@ -118,7 +118,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 </div>
 
                 <div class="form-group">
-                    <a href="index.php" class="btn btn-outline-light float-left">Voltar</a>
+                    <a href="visualiza.php" class="btn btn-outline-light float-left">Voltar</a>
                 </div>
             </form>
         </div>
