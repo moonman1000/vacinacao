@@ -1,12 +1,13 @@
 <?php
-// Configuração do banco de dados
-$servername = "localhost"; // ou o endereço do seu servidor MySQL
-$username = "root";
-$password = "";
-$dbname = "cadastro_vacinacao";
+// Configuração do banco de dados usando variáveis de ambiente
+$servername = getenv('DB_HOST');
+$username   = getenv('DB_USER');
+$password   = getenv('DB_PASSWORD');
+$dbname     = getenv('DB_NAME');
+$port       = getenv('DB_PORT');
 
-// Conexão ao banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Conexão ao banco de dados (incluindo a porta)
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Verificação da conexão
 if ($conn->connect_error) {
@@ -17,19 +18,26 @@ if ($conn->connect_error) {
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Query para selecionar o usuário com o ID especificado
-    $sql_select = "SELECT * FROM usuarios WHERE id = $id";
-    $result = $conn->query($sql_select);
+    // Query para selecionar o membro com o ID especificado (usando prepared statement)
+    $sql_select = "SELECT * FROM membros WHERE id = ?";
+    $stmt = $conn->prepare($sql_select);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Verificação se o usuário existe
+    // Verificação se o membro existe
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        echo "Usuário não encontrado.";
+        echo "Membro não encontrado.";
+        $stmt->close();
+        $conn->close();
         exit;
     }
+    $stmt->close();
 } else {
     echo "ID inválido.";
+    $conn->close();
     exit;
 }
 
@@ -41,7 +49,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuário</title>
+    <title>Editar Membro</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -54,45 +62,36 @@ $conn->close();
             justify-content: center;
             align-items: center;
         }
-
         .card-edit {
             max-width: 600px;
             width: 100%;
             margin: auto;
             border: none;
         }
-
         .card-header {
             text-align: center;
         }
-
         .logo_title {
             color: #fff;
             font-size: 1.5rem;
             margin-top: 20px;
         }
-
         .input-group-prepend .input-group-text {
             background-color: #fff;
         }
-
         .edit_btn {
             background-color: #dc3545;
             color: #fff;
         }
-
         .edit_btn:hover {
             background-color: #c82333;
         }
-
         .form-label {
             font-weight: bold;
         }
-
         .form-control {
             margin-bottom: 15px;
         }
-
         .btn-custom {
             background-color: #4CAF50;
             color: #fff;
@@ -101,22 +100,18 @@ $conn->close();
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .btn-custom:hover {
             background-color: #45a049;
         }
-
         .btn-outline-custom {
             color: #4CAF50;
             border-color: #4CAF50;
         }
-
         .btn-outline-custom:hover {
             color: white;
             background-color: #4CAF50;
             border-color: #4CAF50;
         }
-
         .label-white {
             color: white;
         }
@@ -126,7 +121,7 @@ $conn->close();
 <div class="container">
     <div class="card card-edit mx-auto text-center bg-dark">
         <div class="card-header mx-auto bg-dark">
-            <span class="logo_title mt-5">Editar Usuário</span>
+            <span class="logo_title mt-5">Editar Membro</span>
         </div>
         <div class="card-body">
             <form action="atualizar.php" method="POST">
@@ -168,7 +163,7 @@ $conn->close();
                 </div>
 
                 <div class="form-group">
-                    <a href="index.php" class="btn btn-outline-light float-left">Voltar</a>
+                    <a href="visualiza.php" class="btn btn-outline-light float-left">Voltar</a>
                 </div>
             </form>
         </div>
