@@ -1,13 +1,12 @@
 <?php
-// Configuração do banco de dados usando variáveis de ambiente
-$servername = getenv('DB_HOST');
-$username   = getenv('DB_USER');
-$password   = getenv('DB_PASSWORD');
-$dbname     = getenv('DB_NAME');
-$port       = getenv('DB_PORT'); // Adicione esta variável no Render
+// Configuração do banco de dados
+$servername = "localhost"; // ou o endereço do seu servidor MySQL
+$username = "root";
+$password = "";
+$dbname = "cadastro_vacinacao";
 
-// Conexão ao banco de dados (incluindo a porta)
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
+// Conexão ao banco de dados
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificação da conexão
 if ($conn->connect_error) {
@@ -22,7 +21,7 @@ $vacinadoGripe = isset($_POST['vacinado_gripe']) ? 'Sim' : 'Não';
 $vacinadoCovid = isset($_POST['vacinado_covid']) ? 'Sim' : 'Não';
 
 // Prepara a consulta SQL para inserir os dados
-$sql_insert = "INSERT INTO membros (nome, idade, telefone, vacinado_gripe, vacinado_covid) VALUES (?, ?, ?, ?, ?)";
+$sql_insert = "INSERT INTO usuarios (nome, idade, telefone, vacinado_gripe, vacinado_covid) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql_insert);
 $stmt->bind_param("sisss", $nome, $idade, $telefone, $vacinadoGripe, $vacinadoCovid);
 

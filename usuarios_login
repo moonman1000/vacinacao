@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 <?php
 $hashed_password = password_hash("sua_senha", PASSWORD_DEFAULT);
 echo $hashed_password;
 ?>
+=======
+<?php
+$hashed_password = password_hash("sua_senha", PASSWORD_DEFAULT);
+echo $hashed_password;
+?>
+>>>>>>> 68221b35f241cb4d8c71073fab7709096587fc5d
