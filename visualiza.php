@@ -113,11 +113,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <a href="logout.php" class="btn btn-outline-danger btn-custom">Sair</a>
                 <div class="table-responsive">
                     <?php
-                    // Configuração do banco de dados
-                    $servername = "localhost"; // ou o endereço do seu servidor MySQL
-                    $username = "root";
-                    $password = "";
-                    $dbname = "cadastro_vacinacao";
+                    // Configuração do banco de dados usando variáveis de ambiente
+                    $servername = getenv('DB_HOST');
+                    $username   = getenv('DB_USER');
+                    $password   = getenv('DB_PASSWORD');
+                    $dbname     = getenv('DB_NAME');
+                    $port       = getenv('DB_PORT'); // Adicione esta variável no Render
 
                     // Conexão ao banco de dados
                     $conn = new mysqli($servername, $username, $password, $dbname);
