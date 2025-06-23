@@ -30,17 +30,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             text-align: center;
         }
 
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-width: 600px; /* Garante largura mínima para rolagem */
         }
 
         th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            white-space: nowrap; /* Evita quebra de texto */
         }
 
         th {
@@ -118,49 +125,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 margin: 5px auto;
                 padding: 0 2px;
             }
-
-            table, thead, tbody, th, td, tr {
-                display: block;
+            .table-responsive {
                 width: 100%;
+                overflow-x: auto;
             }
-
-            thead {
-                display: none;
+            table {
+                min-width: 600px;
             }
-
-            tr {
-                margin-bottom: 15px;
-                background: #fff;
-                box-shadow: 0 0 5px rgba(0,0,0,0.05);
-                border-radius: 5px;
-                padding: 10px 0;
-            }
-
-            td {
-                border: none;
-                position: relative;
-                padding-left: 50%;
-                min-height: 40px;
-                text-align: left;
-            }
-
-            td:before {
-                position: absolute;
-                top: 12px;
-                left: 15px;
-                width: 45%;
-                white-space: nowrap;
-                font-weight: bold;
-                color: #333;
-            }
-
-            td:nth-of-type(1):before { content: "Nome"; }
-            td:nth-of-type(2):before { content: "Idade"; }
-            td:nth-of-type(3):before { content: "Telefone"; }
-            td:nth-of-type(4):before { content: "Vacinado contra Gripe"; }
-            td:nth-of-type(5):before { content: "Vacinado contra Covid-19"; }
-            td:nth-of-type(6):before { content: "Ações"; }
-
             .return-btn, .print-btn, .logout-btn {
                 width: 90%;
                 margin: 10px auto;
@@ -196,6 +167,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     echo "<div class='container'>";
     if ($result->num_rows > 0) {
         echo "<h2>PARÔQUIA NOSSA SENHORA DE FÁTIMA<br>Membros Cadastrados<br>Vacinação</br></h2>";
+        echo "<div class='table-responsive'>";
         echo "<table>";
         echo "<thead><tr><th>Nome</th><th>Idade</th><th>Telefone</th><th class='centered'>Vacinado contra Gripe</th><th class='centered'>Vacinado contra Covid-19</th><th class='actions-col'>Ações</th></tr></thead><tbody>";
         // Loop pelos resultados para exibição
@@ -213,6 +185,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             echo "</tr>";
         }
         echo "</tbody></table>";
+        echo "</div>"; // fecha .table-responsive
         echo "<a href='index.php' class='return-btn'>Voltar</a>";
         echo "<a href='cadastro_administrador.php' class='return-btn'>Cadastrar Administrador</a>";
         echo "<button onclick='window.print()' class='print-btn'>Imprimir</button>";
