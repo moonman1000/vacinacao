@@ -124,7 +124,7 @@ $conn->close();
             <span class="logo_title mt-5">Editar Membro</span>
         </div>
         <div class="card-body">
-            <form action="atualizar.php" method="POST">
+            <form action="atualiza.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
 
                 <div class="input-group form-group">
