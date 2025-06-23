@@ -135,8 +135,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             echo "<td>" . htmlspecialchars($row['idade']) . "</td>";
             echo "<td>" . htmlspecialchars($row['telefone']) . "</td>";
             echo "<td class='actions-col'>";
-            echo "<a href='editar.php?id=" . $row['id'] . "' class='edit-btn'>Editar</a> ";
-            echo "<a href='deletar.php?id=" . $row['id'] . "' class='delete-btn' onclick='return confirm(\"Tem certeza que deseja deletar este registro?\")'>Deletar</a>";
+            echo "<a href='edita.php?id=" . $row['id'] . "' class='edit-btn'>Editar</a> ";
+            echo "<a href='deleta.php?id=" . $row['id'] . "' class='delete-btn' onclick='return confirm(\"Tem certeza que deseja deletar este registro?\")'>Deletar</a>";
             echo "</td>";
             echo "</tr>";
         }
