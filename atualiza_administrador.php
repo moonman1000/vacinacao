@@ -27,7 +27,7 @@ if ($id && $nome && $email) {
     $stmt->bind_param("ssi", $nome, $email, $id);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Dados do administrador atualizados com sucesso'); window.location.href='listar_administradores.php';</script>";
+        echo "<script>alert('Dados do administrador atualizados com sucesso'); window.location.href='administradores.php';</script>";
     } else {
         echo "Erro ao atualizar dados: " . $conn->error;
     }
