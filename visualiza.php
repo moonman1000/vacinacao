@@ -110,6 +110,63 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 display: none;
             }
         }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 600px) {
+            .container {
+                width: 98%;
+                margin: 5px auto;
+                padding: 0 2px;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                background: #fff;
+                box-shadow: 0 0 5px rgba(0,0,0,0.05);
+                border-radius: 5px;
+                padding: 10px 0;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                min-height: 40px;
+                text-align: left;
+            }
+
+            td:before {
+                position: absolute;
+                top: 12px;
+                left: 15px;
+                width: 45%;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #333;
+            }
+
+            td:nth-of-type(1):before { content: "Nome"; }
+            td:nth-of-type(2):before { content: "Idade"; }
+            td:nth-of-type(3):before { content: "Telefone"; }
+            td:nth-of-type(4):before { content: "Vacinado contra Gripe"; }
+            td:nth-of-type(5):before { content: "Vacinado contra Covid-19"; }
+            td:nth-of-type(6):before { content: "Ações"; }
+
+            .return-btn, .print-btn, .logout-btn {
+                width: 90%;
+                margin: 10px auto;
+                font-size: 1.1em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -140,7 +197,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     if ($result->num_rows > 0) {
         echo "<h2>PARÔQUIA NOSSA SENHORA DE FÁTIMA<br>Membros Cadastrados<br>Vacinação</br></h2>";
         echo "<table>";
-        echo "<tr><th>Nome</th><th>Idade</th><th>Telefone</th><th class='centered'>Vacinado contra Gripe</th><th class='centered'>Vacinado contra Covid-19</th><th class='actions-col'>Ações</th></tr>";
+        echo "<thead><tr><th>Nome</th><th>Idade</th><th>Telefone</th><th class='centered'>Vacinado contra Gripe</th><th class='centered'>Vacinado contra Covid-19</th><th class='actions-col'>Ações</th></tr></thead><tbody>";
         // Loop pelos resultados para exibição
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
@@ -155,7 +212,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             echo "</td>";
             echo "</tr>";
         }
-        echo "</table>";
+        echo "</tbody></table>";
         echo "<a href='index.php' class='return-btn'>Voltar</a>";
         echo "<a href='cadastro_administrador.php' class='return-btn'>Cadastrar Administrador</a>";
         echo "<button onclick='window.print()' class='print-btn'>Imprimir</button>";
