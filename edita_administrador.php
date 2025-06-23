@@ -146,7 +146,7 @@ $conn->close();
                 </div>
 
                 <div class="form-group">
-                    <a href="listar_administradores.php" class="btn btn-outline-light float-left">Voltar</a>
+                    <a href="administradores.php" class="btn btn-outline-light float-left">Voltar</a>
                 </div>
             </form>
         </div>
