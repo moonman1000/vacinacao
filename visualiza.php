@@ -12,6 +12,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários Cadastrados</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,13 +23,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         }
 
         .container {
-            width: 80%;
+            max-width: 900px;
             margin: 20px auto;
         }
 
         h2 {
             color: #333;
             text-align: center;
+            margin-bottom: 30px;
         }
 
         .table-responsive {
@@ -40,14 +43,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            min-width: 600px; /* Garante largura mínima para rolagem */
+            min-width: 600px;
         }
 
         th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-            white-space: nowrap; /* Evita quebra de texto */
+            white-space: nowrap;
         }
 
         th {
@@ -63,62 +66,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             text-align: center;
         }
 
-        .return-btn, .print-btn, .logout-btn {
-            display: block;
-            width: 100px;
-            margin: 20px auto;
-            padding: 10px;
-            text-align: center;
-            background-color: #4CAF50;
-            color: #fff;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .return-btn:hover, .print-btn:hover, .logout-btn:hover {
-            background-color: #45a049;
-        }
-
-        .edit-btn {
-            background-color: #FFA500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            padding: 6px 12px;
-            text-decoration: none;
-        }
-
-        .edit-btn:hover {
-            background-color: #FF8C00;
-        }
-
-        .delete-btn {
-            background-color: #FF0000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            padding: 6px 12px;
-            text-decoration: none;
-        }
-
-        .delete-btn:hover {
-            background-color: #CC0000;
-        }
-
         @media print {
             .actions-col {
                 display: none;
             }
         }
 
-        /* RESPONSIVIDADE */
         @media (max-width: 600px) {
             .container {
                 width: 98%;
@@ -132,17 +85,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             table {
                 min-width: 600px;
             }
-            .return-btn, .print-btn, .logout-btn {
-                width: 90%;
-                margin: 10px auto;
-                font-size: 1.1em;
-            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <a href="logout.php" class="logout-btn">Logout</a>
+<div class="container py-3">
+    <a href="logout.php" class="btn btn-danger w-100 mb-2">Logout</a>
     <?php
     // Configuração do banco de dados usando variáveis de ambiente
     $servername = getenv('DB_HOST');
@@ -164,12 +112,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     $result = $conn->query($sql_select);
 
     // Verificação se há resultados a exibir
-    echo "<div class='container'>";
+    echo "<div class='container px-0'>";
     if ($result->num_rows > 0) {
-        echo "<h2>PARÔQUIA NOSSA SENHORA DE FÁTIMA<br>Membros Cadastrados<br>Vacinação</br></h2>";
+        echo "<h2>PARÔQUIA NOSSA SENHORA DE FÁTIMA<br>Membros Cadastrados<br>Vacinação</h2>";
         echo "<div class='table-responsive'>";
-        echo "<table>";
-        echo "<thead><tr><th>Nome</th><th>Idade</th><th>Telefone</th><th class='centered'>Vacinado contra Gripe</th><th class='centered'>Vacinado contra Covid-19</th><th class='actions-col'>Ações</th></tr></thead><tbody>";
+        echo "<table class='table align-middle'>";
+        echo "<thead><tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Telefone</th>
+                <th class='centered'>Vacinado contra Gripe</th>
+                <th class='centered'>Vacinado contra Covid-19</th>
+                <th class='actions-col'>Ações</th>
+              </tr></thead><tbody>";
         // Loop pelos resultados para exibição
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
@@ -179,19 +134,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             echo "<td class='centered'>" . htmlspecialchars($row['vacinado_gripe']) . "</td>";
             echo "<td class='centered'>" . htmlspecialchars($row['vacinado_covid']) . "</td>";
             echo "<td class='actions-col'>";
-            echo "<a href='edita.php?id=" . $row['id'] . "' class='edit-btn'>Editar</a> ";
-            echo "<a href='deleta.php?id=" . $row['id'] . "' class='delete-btn' onclick='return confirm(\"Tem certeza que deseja deletar este registro?\")'>Deletar</a>";
+            echo "<a href='edita.php?id=" . $row['id'] . "' class='btn btn-warning btn-sm me-1 mb-1'>Editar</a>";
+            echo "<a href='deleta.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm mb-1' onclick='return confirm(\"Tem certeza que deseja deletar este registro?\")'>Deletar</a>";
             echo "</td>";
             echo "</tr>";
         }
         echo "</tbody></table>";
         echo "</div>"; // fecha .table-responsive
-        echo "<a href='index.php' class='return-btn'>Voltar</a>";
-        echo "<a href='cadastro_administrador.php' class='return-btn'>Cadastrar Administrador</a>";
-        echo "<button onclick='window.print()' class='print-btn'>Imprimir</button>";
+        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
+        echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2'>Cadastrar Administrador</a>";
+        echo "<button onclick='window.print()' class='btn btn-success w-100 mb-2'>Imprimir</button>";
     } else {
         echo "<p>Nenhum usuário cadastrado.</p>";
-        echo "<a href='index.php' class='return-btn'>Voltar</a>";
+        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
     }
     echo "</div>";
 
@@ -199,11 +154,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     $conn->close();
     ?>
 </div>
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
+<!-- Bootstrap JS (opcional, só se for usar componentes JS do Bootstrap) -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 </body>
 </html>
 
