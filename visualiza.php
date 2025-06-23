@@ -156,7 +156,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             echo "</tr>";
         }
         echo "</table>";
-        echo "<a href='dashboard.php' class='return-btn'>Voltar</a>";
+        echo "<a href='index.php' class='return-btn'>Voltar</a>";
         echo "<button onclick='window.print()' class='print-btn'>Imprimir</button>";
     } else {
         echo "<p>Nenhum usuário cadastrado.</p>";
