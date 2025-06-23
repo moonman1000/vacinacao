@@ -123,16 +123,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     $dbname     = getenv('DB_NAME');
     $port       = getenv('DB_PORT');
 
-    // Conexão ao banco de dados
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Conexão ao banco de dados (incluindo a porta)
+    $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
     // Verificação da conexão
     if ($conn->connect_error) {
         die("Conexão falhou: " . $conn->connect_error);
     }
 
-    // Query para selecionar todos os usuários
-    $sql_select = "SELECT * FROM usuarios";
+    // Query para selecionar todos os membros
+    $sql_select = "SELECT * FROM membros ORDER BY nome ASC";
     $result = $conn->query($sql_select);
 
     // Verificação se há resultados a exibir
