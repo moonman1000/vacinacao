@@ -66,9 +66,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             text-align: center;
         }
 
+        /* Oculta botões e colunas de ação na impressão */
         @media print {
+            .no-print, .no-print * {
+                display: none !important;
+            }
             .actions-col {
-                display: none;
+                display: none !important;
+            }
+            body {
+                background: #fff !important;
+            }
+            .container, .table-responsive, table {
+                box-shadow: none !important;
+                background: #fff !important;
             }
         }
 
@@ -90,7 +101,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 </head>
 <body>
 <div class="container py-3">
-    <a href="logout.php" class="btn btn-danger w-100 mb-2">Logout</a>
+    <a href="logout.php" class="btn btn-danger w-100 mb-2 no-print">Logout</a>
     <?php
     // Configuração do banco de dados usando variáveis de ambiente
     $servername = getenv('DB_HOST');
@@ -119,14 +130,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         echo "<thead><tr>
                 <th>Nome</th>
                 <th>Email</th>
-                <th class='actions-col'>Ações</th>
+                <th class='actions-col no-print'>Ações</th>
               </tr></thead><tbody>";
         // Loop pelos resultados para exibição
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
             echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-            echo "<td class='actions-col'>";
+            echo "<td class='actions-col no-print'>";
             echo "<a href='edita_administrador.php?id=" . $row['id'] . "' class='btn btn-warning btn-sm me-1 mb-1'>Editar</a>";
             echo "<a href='deleta_administrador.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm mb-1' onclick='return confirm(\"Tem certeza que deseja deletar este administrador?\")'>Deletar</a>";
             echo "</td>";
@@ -134,14 +145,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         }
         echo "</tbody></table>";
         echo "</div>"; // fecha .table-responsive
-        echo "<a href='visualiza.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
-        echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2'>Cadastrar Administrador</a>";
-        echo "<button onclick='window.print()' class='btn btn-success w-100 mb-2'>Imprimir</button>";
+        echo "<a href='visualiza.php' class='btn btn-secondary w-100 mb-2 no-print'>Voltar</a>";
+        echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2 no-print'>Cadastrar Administrador</a>";
+        echo "<button onclick='window.print()' class='btn btn-success w-100 mb-2 no-print'>Imprimir</button>";
     } else {
         echo "<h2>Administradores Cadastrados</h2>";
         echo "<p>Nenhum administrador cadastrado.</p>";
-        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
-        echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2'>Cadastrar Administrador</a>";
+        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2 no-print'>Voltar</a>";
+        echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2 no-print'>Cadastrar Administrador</a>";
     }
     echo "</div>";
 
