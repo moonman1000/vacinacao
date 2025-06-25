@@ -134,7 +134,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         }
         echo "</tbody></table>";
         echo "</div>"; // fecha .table-responsive
-        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
+        echo "<a href='visualiza.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
         echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2'>Cadastrar Administrador</a>";
         echo "<button onclick='window.print()' class='btn btn-success w-100 mb-2'>Imprimir</button>";
     } else {
