@@ -66,9 +66,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             text-align: center;
         }
 
+        /* Oculta botões e colunas de ação na impressão */
         @media print {
+            .no-print, .no-print * {
+                display: none !important;
+            }
             .actions-col {
-                display: none;
+                display: none !important;
+            }
+            body {
+                background: #fff !important;
+            }
+            .container, .table-responsive, table {
+                box-shadow: none !important;
+                background: #fff !important;
             }
         }
 
@@ -90,7 +101,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 </head>
 <body>
 <div class="container py-3">
-    <a href="logout.php" class="btn btn-danger w-100 mb-2">Logout</a>
+    <a href="logout.php" class="btn btn-danger w-100 mb-2 no-print">Logout</a>
     <?php
     // Configuração do banco de dados usando variáveis de ambiente
     $servername = getenv('DB_HOST');
@@ -123,7 +134,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <th>Telefone</th>
                 <th class='centered'>Vacinado contra Gripe</th>
                 <th class='centered'>Vacinado contra Covid-19</th>
-                <th class='actions-col'>Ações</th>
+                <th class='actions-col no-print'>Ações</th>
               </tr></thead><tbody>";
         // Loop pelos resultados para exibição
         while ($row = $result->fetch_assoc()) {
@@ -133,7 +144,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             echo "<td>" . htmlspecialchars($row['telefone']) . "</td>";
             echo "<td class='centered'>" . htmlspecialchars($row['vacinado_gripe']) . "</td>";
             echo "<td class='centered'>" . htmlspecialchars($row['vacinado_covid']) . "</td>";
-            echo "<td class='actions-col'>";
+            echo "<td class='actions-col no-print'>";
             echo "<a href='edita.php?id=" . $row['id'] . "' class='btn btn-warning btn-sm me-1 mb-1'>Editar</a>";
             echo "<a href='deleta.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm mb-1' onclick='return confirm(\"Tem certeza que deseja deletar este registro?\")'>Deletar</a>";
             echo "</td>";
@@ -141,13 +152,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         }
         echo "</tbody></table>";
         echo "</div>"; // fecha .table-responsive
-        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
-        echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2'>Cadastrar Administrador</a>";
-        echo "<a href='administradores.php' class='btn btn-primary w-100 mb-2'>Administradores Cadastrados</a>";
-        echo "<button onclick='window.print()' class='btn btn-success w-100 mb-2'>Imprimir</button>";
+        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2 no-print'>Voltar</a>";
+        echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2 no-print'>Cadastrar Administrador</a>";
+        echo "<a href='administradores.php' class='btn btn-primary w-100 mb-2 no-print'>Administradores Cadastrados</a>";
+        echo "<button onclick='window.print()' class='btn btn-success w-100 mb-2 no-print'>Imprimir</button>";
     } else {
         echo "<p>Nenhum usuário cadastrado.</p>";
-        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2'>Voltar</a>";
+        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2 no-print'>Voltar</a>";
     }
     echo "</div>";
 
@@ -155,8 +166,5 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     $conn->close();
     ?>
 </div>
-<!-- Bootstrap JS (opcional, só se for usar componentes JS do Bootstrap) -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 </body>
 </html>
-
