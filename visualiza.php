@@ -19,18 +19,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #343a40; /* cinza escuro */
         }
 
         .container {
             max-width: 900px;
-            margin: 20px auto;
+            margin: 30px auto;
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+            padding-bottom: 30px;
         }
 
         h2 {
-            color: #333;
+            color: #fff;
             text-align: center;
-            margin-bottom: 30px;
+            margin: 30px 0 30px 0;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .table-responsive {
@@ -42,24 +48,32 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
             min-width: 600px;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         th, td {
-            padding: 12px 15px;
+            padding: 14px 18px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e0e0e0;
             white-space: nowrap;
         }
 
         th {
-            background-color: #f2f2f2;
-            color: #333;
+            background-color: #495057;
+            color: #fff;
+            font-weight: 600;
+            border-bottom: 2px solid #343a40;
         }
 
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f5f8fa;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
         }
 
         .centered {
@@ -81,6 +95,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 box-shadow: none !important;
                 background: #fff !important;
             }
+            h2 {
+                color: #000 !important;
+            }
         }
 
         @media (max-width: 600px) {
@@ -101,7 +118,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 </head>
 <body>
 <div class="container py-3">
-    <a href="logout.php" class="btn btn-danger w-100 mb-2 no-print">Logout</a>
+    <a href="logout.php" class="btn btn-light w-100 mb-2 no-print">Logout</a>
     <?php
     // Configuração do banco de dados usando variáveis de ambiente
     $servername = getenv('DB_HOST');
@@ -152,13 +169,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         }
         echo "</tbody></table>";
         echo "</div>"; // fecha .table-responsive
-        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2 no-print'>Voltar</a>";
+        echo "<a href='index.php' class='btn btn-outline-light w-100 mb-2 no-print'>Voltar</a>";
         echo "<a href='cadastro_administrador.php' class='btn btn-primary w-100 mb-2 no-print'>Cadastrar Administrador</a>";
         echo "<a href='administradores.php' class='btn btn-primary w-100 mb-2 no-print'>Administradores Cadastrados</a>";
         echo "<button onclick='window.print()' class='btn btn-success w-100 mb-2 no-print'>Imprimir</button>";
     } else {
-        echo "<p>Nenhum usuário cadastrado.</p>";
-        echo "<a href='index.php' class='btn btn-secondary w-100 mb-2 no-print'>Voltar</a>";
+        echo "<p class='text-white'>Nenhum usuário cadastrado.</p>";
+        echo "<a href='index.php' class='btn btn-outline-light w-100 mb-2 no-print'>Voltar</a>";
     }
     echo "</div>";
 
